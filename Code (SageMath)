@@ -1,0 +1,25 @@
+A = matrix([[0,1,0,0],[-1,0,0,0],[0,0,0,1],[1,0,-1,0]])
+print A
+ev = A.eigenvalues()
+print ev
+P0 = identity_matrix(A.nrows())
+listP = [w for w in range(len(ev))]
+listP[0] = P0
+i = 1
+for i in range(4):
+    listP[i] = A - ev[i]*P0
+    i = i +1
+#while i < len(ev):
+#   listP[i] = A - ev[i]*P0
+#   i = i +1
+t = var ('t')
+j = 1
+listR = [w for w in range(len(ev))]
+listR[0] = e^(ev[0]*t)
+while j < len(ev):
+   listR[j] = e^(ev[j]*t)*(e^((ev[j-1]-ev[j])*t)).integral(t)
+   j = j+1
+listE = map(operator.mul, listP, listR)
+E = [w for w in range(len(ev))]
+print 'Result: '
+print listE[0]+listE[1]
